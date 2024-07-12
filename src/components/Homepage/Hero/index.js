@@ -1,7 +1,7 @@
 import React from "react";
 import DesktopRadioImage from "assets/icons/images/radio-desktop.png";
-import { Wrapper, TextWrapper, PlayButton } from "./styled";
-import { MainTitle, Text, ButtonText } from "components/ui/Typography";
+import { Wrapper, TextWrapper, PlayButton, HeroText } from "./styled";
+import { MainTitle, ButtonText } from "components/ui/Typography";
 import { Play } from "components/ui/Icons";
 
 function Hero() {
@@ -9,7 +9,7 @@ function Hero() {
     <Wrapper>
       <TextWrapper>
         <MainTitle>Radio</MainTitle>
-        <Text>Pick your todays mood. We will play a perfect mix!</Text>
+        <HeroText>Pick your todays mood. We will play a perfect mix!</HeroText>
         <PlayButton>
           <Play />
           <ButtonText>Play</ButtonText>
