@@ -17,3 +17,10 @@ export const ArtistsWrapper = styled.div`
 export const ArtistSkeletonWrapper = styled.div`
   display: flex;
 `;
+
+export const ArtistLoaderWrapper = styled.div`
+  display: flex;
+  gap: 14px;
+  width: 100%;
+  flex-direction: column;
+`;

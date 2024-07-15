@@ -27,7 +27,7 @@ export const ButtonsWrapper = styled.div`
 export const GenresWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
   width: 100%;
   min-height: 116px;
 `;

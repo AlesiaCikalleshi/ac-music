@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Wrapper } from "./styled";
-import { SubTitle } from "components/ui/Typography";
+import { Wrapper, GenreName } from "./styled";
 
 function GenreCard({ backgroundImage, name }) {
   return (
     <Wrapper backgroundImage={backgroundImage}>
-      <SubTitle>{name}</SubTitle>
+      <GenreName>{name}</GenreName>
     </Wrapper>
   );
 }

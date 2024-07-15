@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SubTitle } from "components/ui/Typography";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -23,4 +24,8 @@ export const Wrapper = styled.div`
     border-radius: 25px;
     background-image: url(${(props) => props.backgroundImage});
   }
+`;
+
+export const GenreName = styled(SubTitle)`
+  z-index: ${({ theme }) => theme.zIndex["10"]};
 `;
