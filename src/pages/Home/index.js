@@ -4,7 +4,8 @@ import { SectionTitle } from "components/ui/Typography";
 import { toast } from "react-toastify";
 import { Hero, Genres, Artists } from "components/Homepage";
 import TracksTable from "TracksTable";
-import { ContentWrapper, GreyTitle, TrendsAndArtistSection, StyledAside } from "./styled";
+import { GreyTitle, TrendsAndArtistSection, StyledAside } from "./styled";
+import { ContentWrapper } from "Layout";
 import { loadCharts } from "services/api";
 
 // Import Swiper styles
@@ -39,7 +40,7 @@ function Home() {
         <div>
           <GreyTitle>Global</GreyTitle>
           <SectionTitle>Tranding right now</SectionTitle>
-          <TracksTable tracks={chart?.tracks?.data} />
+          <TracksTable isLoading={isLoading} tracks={chart?.tracks?.data} />
         </div>
         <StyledAside>
           <GreyTitle>Global</GreyTitle>

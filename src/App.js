@@ -12,6 +12,10 @@ import "react-loading-skeleton/dist/skeleton.css";
 // Import react toastify css
 import "react-toastify/dist/ReactToastify.css";
 
+// Import rc-slider css
+import "rc-slider/assets/index.css";
+import Player from "Player";
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -22,6 +26,7 @@ function App() {
         <GlobalStyles />
         <Header />
         <Home />
+        <Player />
         <ToastContainer
           position="bottom-left"
           autoClose={5000}
