@@ -22,7 +22,7 @@ export const Wrapper = styled.div`
     background-size: cover;
     background-position: center center;
     border-radius: 25px;
-    background-image: url(${(props) => props.backgroundImage});
+    background-image: url(${(props) => props.image});
   }
 `;
 

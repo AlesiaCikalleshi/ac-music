@@ -45,7 +45,8 @@ export const TrackInfoImage = styled.img`
   border-radius: 15px;
 `;
 
-export const TrackInfoTextWraper = styled(TableData)`
+export const TrackInfoTextWraper = styled.div`
+  padding: 10px 20px 10px 0;
   display: flex;
   flex-direction: column;
   gap: 10px;

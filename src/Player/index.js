@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   Wrapper,
   TrackInfoWrapper,
@@ -9,103 +9,139 @@ import {
   ProgressWrapper,
   TrackTime,
   VolumeWrapper,
+  TrackTitle,
 } from "./styled";
 import { ContentWrapper } from "Layout";
-import { Text } from "components/ui/Typography";
 import IconButton from "components/ui/IconButton";
-import { SkipLeft, SkipRight, Play, Volume } from "components/ui/Icons";
+import { SkipLeft, SkipRight, Play, Volume, Pause } from "components/ui/Icons";
 import Slider from "rc-slider";
 import { theme } from "styles/Theme";
-const track = {
-  id: 2843869922,
-  title: "Alibi (with Pabllo Vittar & Yseult)",
-  title_short: "Alibi (with Pabllo Vittar & Yseult)",
-  title_version: "",
-  link: "https://www.deezer.com/track/2843869922",
-  duration: 161,
-  rank: 988399,
-  explicit_lyrics: false,
-  explicit_content_lyrics: 0,
-  explicit_content_cover: 0,
-  preview: "https://cdn-preview-6.dzcdn.net/stream/c-66405b13ab8bbcb8b73068d249178650-1.mp3",
-  md5_image: "ab69ef08c72c425dbf21889c84035966",
-  position: 1,
-  artist: {
-    id: 5683028,
-    name: "Sevdaliza",
-    link: "https://www.deezer.com/artist/5683028",
-    picture: "https://api.deezer.com/artist/5683028/image",
-    picture_small:
-      "https://e-cdns-images.dzcdn.net/images/artist/a9f7776cfb75bc6fa08024975f86b8fd/56x56-000000-80-0-0.jpg",
-    picture_medium:
-      "https://e-cdns-images.dzcdn.net/images/artist/a9f7776cfb75bc6fa08024975f86b8fd/250x250-000000-80-0-0.jpg",
-    picture_big:
-      "https://e-cdns-images.dzcdn.net/images/artist/a9f7776cfb75bc6fa08024975f86b8fd/500x500-000000-80-0-0.jpg",
-    picture_xl:
-      "https://e-cdns-images.dzcdn.net/images/artist/a9f7776cfb75bc6fa08024975f86b8fd/1000x1000-000000-80-0-0.jpg",
-    radio: true,
-    tracklist: "https://api.deezer.com/artist/5683028/top?limit=50",
-    type: "artist",
-  },
-  album: {
-    id: 600656732,
-    title: "Alibi (with Pabllo Vittar & Yseult)",
-    cover: "https://api.deezer.com/album/600656732/image",
-    cover_small:
-      "https://e-cdns-images.dzcdn.net/images/cover/ab69ef08c72c425dbf21889c84035966/56x56-000000-80-0-0.jpg",
-    cover_medium:
-      "https://e-cdns-images.dzcdn.net/images/cover/ab69ef08c72c425dbf21889c84035966/250x250-000000-80-0-0.jpg",
-    cover_big:
-      "https://e-cdns-images.dzcdn.net/images/cover/ab69ef08c72c425dbf21889c84035966/500x500-000000-80-0-0.jpg",
-    cover_xl:
-      "https://e-cdns-images.dzcdn.net/images/cover/ab69ef08c72c425dbf21889c84035966/1000x1000-000000-80-0-0.jpg",
-    md5_image: "ab69ef08c72c425dbf21889c84035966",
-    tracklist: "https://api.deezer.com/album/600656732/tracks",
-    type: "album",
-  },
-  type: "track",
-};
+import { formatSecondsToMSS } from "utils/time";
+import { PlayerContext, PlayerDispatchContext } from "context/playerContext";
+import { actions } from "context/actions";
 
 function Player() {
+  const dispatch = useContext(PlayerDispatchContext);
+  const { track, isPlaying } = useContext(PlayerContext);
+
+  const [playerState, setPlayerState] = useState({
+    isPlaying: false,
+    currentTime: 0,
+    duration: 0,
+    volume: 0.7,
+  });
+  const audioRef = useRef();
+
+  // TIME
+  // for button play or pause
+  const togglePlay = () => {
+    dispatch({
+      type: actions.TOGGLE_PLAY,
+    });
+  };
+
+  // when songs starts, updates the time (seconds)
+  const onTimeUpdate = () => {
+    if (!audioRef.current) return;
+    const currentTime = audioRef.current.currentTime;
+    const duration = audioRef.current.duration;
+    setPlayerState((prev) => ({ ...prev, currentTime, duration }));
+  };
+
+  // when songs starts, updates the time (seconds)
+  const onTrackTimeDrag = (newTime) => {
+    if (!audioRef.current) return;
+    audioRef.current.currentTime = newTime;
+    setPlayerState((prev) => ({ ...prev, currentTime: newTime }));
+  };
+
+  // VOLUME
+  // to mute volume button
+  const toggleVolume = () => {
+    const newVolume = playerState.volume > 0 ? 0 : 1;
+    onVolumeChange(newVolume);
+  };
+
+  // when songs starts, updates the time (seconds)
+  const onVolumeChange = (newVolume) => {
+    if (!audioRef.current) return;
+    audioRef.current.volume = newVolume;
+    setPlayerState((prev) => ({ ...prev, volume: newVolume }));
+  };
+
+  const handleNextSong = () => dispatch({ type: actions.NEXT_SONG });
+  const handlePrevSong = () => dispatch({ type: actions.PREV_SONG });
+
+  useEffect(() => {
+    if (!audioRef?.current) return;
+
+    if (isPlaying) {
+      audioRef.current.play().catch((err) => console.log(err));
+    } else {
+      audioRef.current.pause();
+    }
+  }, [audioRef, track, isPlaying]);
+
+  if (!track) return null;
+
   return (
     <Wrapper>
-      <ContentWrapper display="flex">
+      <ContentWrapper display="flex" items="center">
+        <audio
+          ref={audioRef}
+          src={track.preview}
+          controls
+          onTimeUpdate={onTimeUpdate}
+          onLoadedMetadata={onTimeUpdate}
+          hidden
+          onEnded={handleNextSong}
+        />
         <TrackInfoWrapper>
           <TrackImage src={track?.album.cover} alt={`${track.album.title}'s cover`}></TrackImage>
           <TrackInfoTextWrapper>
-            <Text>{track?.title}</Text>
+            <TrackTitle>{track?.title}</TrackTitle>
             <ArtistName>{track?.artist.name}</ArtistName>
           </TrackInfoTextWrapper>
         </TrackInfoWrapper>
 
         <ControlsWrapper>
-          <IconButton>
+          <IconButton onClick={handlePrevSong}>
             <SkipLeft />
           </IconButton>
-          <IconButton width={55} height={55} withBackground>
-            <Play />
+          <IconButton onClick={togglePlay} width={55} height={55} withBackground>
+            {isPlaying ? <Pause /> : <Play />}
           </IconButton>
-          <IconButton>
+          <IconButton onClick={handleNextSong}>
             <SkipRight />
           </IconButton>
         </ControlsWrapper>
 
         <ProgressWrapper>
-          <TrackTime>00:00</TrackTime>
+          <TrackTime>{formatSecondsToMSS(playerState.currentTime)}</TrackTime>
           <Slider
+            step={0.2}
+            min={0}
+            max={playerState.duration}
+            value={playerState.currentTime}
+            onChange={onTrackTimeDrag}
             style={{ padding: "3px 0" }}
             trackStyle={{ height: 8, backgroundColor: theme.colors.white }}
             railStyle={{ height: 8, backgroundColor: theme.colors.darkGrey }}
             handleStyle={{ border: "none", backgroundColor: theme.colors.white, marginTop: -3 }}
           />
-          <TrackTime>12:00</TrackTime>
+          <TrackTime>{formatSecondsToMSS(playerState.duration)}</TrackTime>
         </ProgressWrapper>
 
         <VolumeWrapper>
-          <IconButton height={24} width={24}>
+          <IconButton onClick={toggleVolume} height={24} width={24}>
             <Volume />
           </IconButton>
           <Slider
+            step={0.01}
+            min={0}
+            max={1}
+            value={playerState.volume}
+            onChange={onVolumeChange}
             style={{ padding: "3px 0" }}
             trackStyle={{ height: 8, backgroundColor: theme.colors.white }}
             railStyle={{ height: 8, backgroundColor: theme.colors.darkGrey }}
