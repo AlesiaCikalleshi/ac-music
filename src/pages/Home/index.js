@@ -5,8 +5,7 @@ import { toast } from "react-toastify";
 import { Hero, Genres, Artists } from "components/Homepage";
 import TracksTable from "TracksTable";
 import { GreyTitle, TrendsAndArtistSection, StyledAside } from "./styled";
-import { ContentWrapper } from "Layout";
-import { loadCharts } from "services/api";
+import { loadCharts, loadTopRadioTrack } from "services/api";
 
 // Import Swiper styles
 import "swiper/css";
@@ -14,14 +13,17 @@ import "swiper/css/pagination";
 
 function Home() {
   const [chart, setChart] = useState();
+  const [radio, setRadio] = useState();
   const [isLoading, setLoading] = useState();
 
   useEffect(() => {
     const loadData = async () => {
       try {
         setLoading(true);
-        const data = await loadCharts();
-        setChart(data);
+        const chart = await loadCharts();
+        const radio = await loadTopRadioTrack();
+        setChart(chart);
+        setRadio(radio);
       } catch (err) {
         toast.error(err.message);
       } finally {
@@ -33,8 +35,8 @@ function Home() {
   }, []);
 
   return (
-    <ContentWrapper>
-      <Hero />
+    <main>
+      <Hero tracks={radio} />
       <Genres />
       <TrendsAndArtistSection>
         <div>
@@ -48,7 +50,7 @@ function Home() {
           <Artists isLoading={isLoading} artists={chart?.artists?.data} />
         </StyledAside>
       </TrendsAndArtistSection>
-    </ContentWrapper>
+    </main>
   );
 }
 

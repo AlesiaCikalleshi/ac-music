@@ -1,10 +1,11 @@
+import { PLAYER_HEIGHT } from "common/constants";
 import { SubTitle } from "components/ui/Typography";
 import styled from "styled-components";
 
 export const TrendsAndArtistSection = styled.section`
   display: grid;
   grid-template-columns: 65% 35%;
-  padding-bottom: 135px;
+  padding-bottom: calc(${PLAYER_HEIGHT}px + 50px);
   overflow: hidden;
 `;
 
