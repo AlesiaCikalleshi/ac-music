@@ -19,6 +19,8 @@ function Hero({ tracks }) {
     });
   };
 
+  //check if my error wrapper works => throw Error('sjkdhzxjlf')
+
   return (
     <Wrapper>
       <TextWrapper>
