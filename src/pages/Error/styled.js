@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-items: center;
   height: calc(100vh - ${HEADER_HEIGHT}px - ${PLAYER_HEIGHT}px);
 `;
