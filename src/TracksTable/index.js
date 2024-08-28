@@ -28,7 +28,8 @@ function TracksTable({ tracks, isLoading }) {
 
   const handleSaveTrackClick = (trackId) => {
     dispatch({
-      type: (actions.TOGGLE_SAVE_TRACK, trackId),
+      type: actions.TOGGLE_SAVE_TRACK,
+      trackId,
     });
   };
 

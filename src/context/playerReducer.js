@@ -44,7 +44,6 @@ export function playerReducer(state, action) {
     }
     case actions.TOGGLE_SAVE_TRACK: {
       const indexOfTrack = state.savedTrackIds.indexOf(action.trackId);
-      console.log(indexOfTrack);
 
       if (indexOfTrack >= 0) {
         const newSavedTrackIds = [...state.savedTrackIds];
