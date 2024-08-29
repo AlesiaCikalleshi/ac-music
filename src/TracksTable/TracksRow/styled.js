@@ -1,6 +1,7 @@
 import IconButton from "components/ui/IconButton";
 import { Text, SubText } from "components/ui/Typography";
 import styled from "styled-components";
+import { device } from "styles/BreakPoints";
 
 export const StyledTrackRow = styled.tr`
   cursor: pointer;
@@ -84,6 +85,11 @@ export const TrackTitle = styled(Text)`
   line-clamp: 1;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+
+  ${device.md} {
+    font-size: 18px;
+    line-height: 22px;
+  }
 `;
 
 export const TrackSubText = styled(SubText)`
@@ -92,4 +98,9 @@ export const TrackSubText = styled(SubText)`
   line-clamp: 1;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+
+  ${device.md} {
+    font-size: 16px;
+    line-height: 19px;
+  }
 `;

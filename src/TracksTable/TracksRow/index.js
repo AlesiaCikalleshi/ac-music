@@ -17,8 +17,17 @@ import { formatSecondsToMSS } from "utils/time";
 import { Heart, Play, Pause } from "components/ui/Icons";
 import Skeleton from "react-loading-skeleton";
 import { theme } from "styles/Theme";
+import { breakpoints } from "styles/BreakPoints";
 
-function TrackRow({ track, index, onClick, isPlaying, handleSaveTrackClick, isSaved }) {
+function TrackRow({
+  track,
+  index,
+  onClick,
+  isPlaying,
+  handleSaveTrackClick,
+  isSaved,
+  screenWidth,
+}) {
   return (
     <StyledTrackRow key={track?.id} onClick={() => onClick(track)}>
       <TableData>
@@ -38,14 +47,18 @@ function TrackRow({ track, index, onClick, isPlaying, handleSaveTrackClick, isSa
           <TrackSubText> {track?.artist?.name || <Skeleton width={250} />}</TrackSubText>
         </TrackInfoTextWraper>
       </TrackInfo>
-      <TableData>
-        <SubText>
-          {track?.duration ? formatSecondsToMSS(track?.duration) : <Skeleton width={48} />}
-        </SubText>
-      </TableData>
-      <TableData>
-        <SubText>{track?.album?.title || <Skeleton width={350} />}</SubText>
-      </TableData>
+      {screenWidth > breakpoints.md && (
+        <TableData>
+          <SubText>
+            {track?.duration ? formatSecondsToMSS(track?.duration) : <Skeleton width={48} />}
+          </SubText>
+        </TableData>
+      )}
+      {screenWidth > breakpoints.md && (
+        <TableData>
+          <SubText>{track?.album?.title || <Skeleton width={350} />}</SubText>
+        </TableData>
+      )}
       <TableData>
         {track ? (
           <StyledIconButton
@@ -84,6 +97,7 @@ TrackRow.propTypes = {
   isPlaying: PropTypes.bool,
   handleSaveTrackClick: PropTypes.func,
   isSaved: PropTypes.bool,
+  screenWidth: PropTypes.number,
 };
 
 export default TrackRow;

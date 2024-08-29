@@ -11,4 +11,5 @@ export const HeaderWrapper = styled.header`
 export const LogoWrapper = styled.header`
   display: flex;
   gap: 20px;
+  align-items: center;
 `;

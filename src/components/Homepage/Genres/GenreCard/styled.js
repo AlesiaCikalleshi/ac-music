@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { SubTitle } from "components/ui/Typography";
+import { device } from "styles/BreakPoints";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -23,6 +24,11 @@ export const Wrapper = styled.div`
     background-position: center center;
     border-radius: 25px;
     background-image: url(${(props) => props.image});
+  }
+
+  ${device.md} {
+    width: 137px;
+    height: 95px;
   }
 `;
 

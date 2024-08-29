@@ -16,8 +16,11 @@ import {
   GenreSkeletonWrapper,
 } from "./styled";
 import { Link } from "react-router-dom";
+import { useWindowSize } from "hooks/useWindowSize";
+import { breakpoints } from "styles/BreakPoints";
 
 function Genres() {
+  const { width } = useWindowSize();
   const [genres, setGenres] = useState();
   const [isLoading, setLoading] = useState();
   const sliderRef = useRef(null);
@@ -67,12 +70,17 @@ function Genres() {
             <Skeleton
               wrapper={GenreSkeletonWrapper}
               key={num}
-              height={116}
-              width={220}
+              height={width < breakpoints.md ? 95 : 116}
+              width={width < breakpoints.md ? 137 : 220}
               borderRadius={25}
             />
           ))}
-        <Swiper ref={sliderRef} slidesPerView="auto" spaceBetween={20} modules={[Pagination]}>
+        <Swiper
+          ref={sliderRef}
+          slidesPerView="auto"
+          spaceBetween={width < breakpoints.md ? 9 : 20}
+          modules={[Pagination]}
+        >
           {!isLoading &&
             genres?.map((genre) => (
               <SwiperSlide key={genre.id} style={{ width: "auto" }}>
