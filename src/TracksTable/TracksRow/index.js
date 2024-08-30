@@ -28,6 +28,7 @@ function TrackRow({
   isSaved,
   screenWidth,
 }) {
+  const isMobileLayout = screenWidth > breakpoints.md;
   return (
     <StyledTrackRow key={track?.id} onClick={() => onClick(track)}>
       <TableData>
@@ -40,11 +41,17 @@ function TrackRow({
         {track ? (
           <TrackInfoImage src={track?.album?.cover} alt={`${track?.album?.title}'s cover`} />
         ) : (
-          <Skeleton width={65} height={65} borderRadius={15} />
+          <Skeleton
+            width={isMobileLayout ? 65 : 45}
+            height={isMobileLayout ? 65 : 45}
+            borderRadius={isMobileLayout ? 15 : 10}
+          />
         )}
         <TrackInfoTextWraper>
-          <TrackTitle> {track?.title || <Skeleton width={320} />}</TrackTitle>
-          <TrackSubText> {track?.artist?.name || <Skeleton width={250} />}</TrackSubText>
+          <TrackTitle>{track?.title || <Skeleton width={isMobileLayout ? 320 : 110} />}</TrackTitle>
+          <TrackSubText>
+            {track?.artist?.name || <Skeleton width={isMobileLayout ? 250 : 80} />}
+          </TrackSubText>
         </TrackInfoTextWraper>
       </TrackInfo>
       {screenWidth > breakpoints.md && (

@@ -38,12 +38,22 @@ export const TrackInfo = styled(TableData)`
   display: flex;
   align-items: center;
   gap: 25px;
+
+  ${device.md} {
+    gap: 10px;
+  }
 `;
 
 export const TrackInfoImage = styled.img`
   height: 65px;
   width: 65px;
   border-radius: 15px;
+
+  ${device.md} {
+    height: 45px;
+    width: 45px;
+    border-radius: 10px;
+  }
 `;
 
 export const TrackInfoTextWraper = styled.div`
@@ -51,6 +61,10 @@ export const TrackInfoTextWraper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  ${device.md} {
+    gap: 2px;
+  }
 `;
 
 export const SongNumberText = styled(SubText)`

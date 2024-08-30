@@ -1,6 +1,7 @@
-import { PLAYER_HEIGHT } from "common/constants";
+import { MOBILE_PLAYER_HEIGHT, PLAYER_HEIGHT } from "common/constants";
 import { SubText, Text } from "components/ui/Typography";
 import styled from "styled-components";
+import { device } from "styles/BreakPoints";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -13,6 +14,10 @@ export const Wrapper = styled.div`
   width: 100%;
   height: ${PLAYER_HEIGHT}px;
   z-index: ${({ theme }) => theme.zIndex["30"]};
+
+  ${device.lg} {
+    height: ${MOBILE_PLAYER_HEIGHT}px;
+  }
 `;
 
 export const TrackInfoWrapper = styled.div`
@@ -50,6 +55,10 @@ export const TrackInfoTextWrapper = styled.div`
   flex-direction: column;
   gap: 10px;
   padding-right: 15px;
+
+  ${device.md} {
+    gap: 2px;
+  }
 `;
 
 export const ControlsWrapper = styled.div`

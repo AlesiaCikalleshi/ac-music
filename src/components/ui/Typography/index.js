@@ -6,6 +6,11 @@ export const MainTitle = styled.h1`
   font-size: 60px;
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   line-height: 90px;
+
+  ${device.md} {
+    font-size: 30px;
+    line-height: 45px;
+  }
 `;
 
 export const SectionTitle = styled.h2`
@@ -44,6 +49,18 @@ export const SubText = styled.span`
   font-size: 20px;
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   line-height: 24.2px;
+
+  ${device.md} {
+    font-size: 18px;
+    line-height: 22px;
+  }
+`;
+
+export const SmallText = styled.span`
+  font-family: ${({ theme }) => theme.fonts.inter}, sans-serif;
+  font-size: 18px;
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  line-height: 22px;
 
   ${device.md} {
     font-size: 18px;
