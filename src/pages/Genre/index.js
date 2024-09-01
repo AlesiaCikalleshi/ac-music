@@ -7,6 +7,7 @@ import { MainTitle, SmallText } from "components/ui/Typography";
 import TracksTable from "TracksTable";
 import { Music } from "components/ui/Icons";
 import Skeleton from "react-loading-skeleton";
+import { theme } from "styles/Theme";
 
 function Genre() {
   const { genreId } = useParams();
@@ -34,7 +35,7 @@ function Genre() {
       <TextWrapper>
         <MainTitle>{genre?.genre?.name || <Skeleton width={200} />}</MainTitle>
         <SongsCountWrapper>
-          <Music />
+          <Music color={theme.colors.secondaryGrey} />
           <SmallText>
             {isLoading ? <Skeleton width={40} /> : `${genre?.tracks?.length} songs`}
           </SmallText>

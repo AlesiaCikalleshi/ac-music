@@ -2,7 +2,8 @@ import axios from "axios";
 
 const API_BASE_URL = "https://api.deezer.com/";
 const API_CHART_URL = `/chart`;
-const API_GENRE_URL = `/genre`;
+const API_ALL_GENRES_URL = `/genre`;
+const API_ALL_ARTISTS_URL = `/artist`;
 const API_SEARCH_URL = `/search`;
 const API_Top_TRACKS_RADIO_URL = `/radio/37151/tracks`;
 
@@ -10,7 +11,7 @@ export async function loadCharts() {
   try {
     const data = await axios(API_CHART_URL);
 
-    if (!data.data) throw Error();
+    if (!data?.data) throw Error();
 
     return data.data;
   } catch (err) {
@@ -21,7 +22,7 @@ export async function loadCharts() {
 export async function search(searchQuery) {
   try {
     const data = await axios.get(`${API_SEARCH_URL}?q=${searchQuery}`);
-    if (!data.data) throw Error();
+    if (!data?.data) throw Error();
 
     return data.data.data;
   } catch (err) {
@@ -32,7 +33,7 @@ export async function search(searchQuery) {
 export async function loadTopRadioTrack() {
   try {
     const data = await axios(`${API_Top_TRACKS_RADIO_URL}?=limit100`);
-    if (!data.data) throw Error();
+    if (!data?.data) throw Error();
 
     return data.data.data;
   } catch (err) {
@@ -42,8 +43,8 @@ export async function loadTopRadioTrack() {
 
 export async function loadGenres() {
   try {
-    const data = await axios.get(API_GENRE_URL);
-    if (!data.data.data) throw Error();
+    const data = await axios.get(API_ALL_GENRES_URL);
+    if (!data?.data?.data) throw Error();
     return data.data.data.filter((genre) => genre.name.toLowerCase() !== "all");
   } catch (err) {
     throw Error("Genres data failed to load!");
@@ -53,8 +54,8 @@ export async function loadGenres() {
 export async function loadGenre(genreId) {
   try {
     const [genreData, radiosData] = await Promise.all([
-      axios.get(`${API_GENRE_URL}/${genreId}`),
-      axios.get(`${API_GENRE_URL}/${genreId}/radios`),
+      axios.get(`${API_ALL_GENRES_URL}/${genreId}`),
+      axios.get(`${API_ALL_GENRES_URL}/${genreId}/radios`),
     ]);
 
     if (!genreData?.data || !radiosData?.data) throw Error();
@@ -69,5 +70,23 @@ export async function loadGenre(genreId) {
     };
   } catch (err) {
     throw Error("Genre data failed to load!");
+  }
+}
+
+export async function loadArtist(artistId) {
+  try {
+    const [artistData, tracksData] = await Promise.all([
+      axios.get(`${API_ALL_ARTISTS_URL}/${artistId}`),
+      axios.get(`${API_ALL_ARTISTS_URL}/${artistId}/top`),
+    ]);
+
+    if (!artistData?.data || !tracksData?.data?.data) throw Error();
+
+    return {
+      artist: artistData.data,
+      tracks: tracksData.data.data,
+    };
+  } catch (err) {
+    throw Error("Artist data failed to load!");
   }
 }
