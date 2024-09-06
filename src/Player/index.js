@@ -28,91 +28,22 @@ import { breakpoints } from "styles/BreakPoints";
 import { useLocation } from "react-router-dom";
 
 function Player() {
-  const location = useLocation();
   const { width } = useWindowSize();
-  const dispatch = useContext(PlayerDispatchContext);
-  const { track, isPlaying } = useContext(PlayerContext);
 
-  const [playerState, setPlayerState] = useState({
-    isPlaying: false,
-    currentTime: 0,
-    duration: 0,
-    volume: 0.7,
-    isOpened: false,
-  });
-  const audioRef = useRef();
-
-  // TIME
-  // for button play or pause
-  const togglePlay = () => {
-    dispatch({
-      type: actions.TOGGLE_PLAY,
-    });
-  };
-
-  const toggleOpen = () => {
-    if (width > breakpoints.lg && !playerState.isOpened) return;
-    setPlayerState((prev) => ({ ...prev, isOpened: !prev.isOpened }));
-  };
-
-  // when songs starts, updates the time (seconds)
-  const onTimeUpdate = () => {
-    if (!audioRef.current) return;
-    const currentTime = audioRef.current.currentTime;
-    const duration = audioRef.current.duration;
-    setPlayerState((prev) => ({ ...prev, currentTime, duration }));
-  };
-
-  // when songs starts, updates the time (seconds)
-  const onTrackTimeDrag = (newTime) => {
-    if (!audioRef.current) return;
-    audioRef.current.currentTime = newTime;
-    setPlayerState((prev) => ({ ...prev, currentTime: newTime }));
-  };
-
-  // VOLUME
-  // to mute volume button
-  const toggleVolume = () => {
-    const newVolume = playerState.volume > 0 ? 0 : 1;
-    onVolumeChange(newVolume);
-  };
-
-  // when songs starts, updates the time (seconds)
-  const onVolumeChange = (newVolume) => {
-    if (!audioRef.current) return;
-    audioRef.current.volume = newVolume;
-    setPlayerState((prev) => ({ ...prev, volume: newVolume }));
-  };
-
-  const handleNextSong = () => dispatch({ type: actions.NEXT_SONG });
-  const handlePrevSong = () => dispatch({ type: actions.PREV_SONG });
-
-  useEffect(() => {
-    if (!audioRef?.current) return;
-
-    if (isPlaying) {
-      audioRef.current.play().catch((err) => console.log(err));
-    } else {
-      audioRef.current.pause();
-    }
-  }, [audioRef, track, isPlaying]);
-
-  useEffect(() => {
-    if (playerState.isOpened) toggleOpen();
-  }, [location]);
-
-  useEffect(() => {
-    if (playerState.isOpened) {
-      window.scroll(0, 0);
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "scroll";
-    }
-  }, [playerState.isOpened]);
-
-  useEffect(() => {
-    if (width > breakpoints.lg && playerState.isOpened) toggleOpen();
-  }, [width]);
+  const {
+    toggleOpen,
+    togglePlay,
+    toggleVolume,
+    handleNextSong,
+    handlePrevSong,
+    onTimeUpdate,
+    onTrackTimeDrag,
+    onVolumeChange,
+    isPlaying,
+    track,
+    audioRef,
+    playerState,
+  } = usePlayer({ width });
 
   if (!track) return null;
 
@@ -324,6 +255,106 @@ function PlayerLayout({
       </VolumeWrapper>
     </ContentWrapper>
   );
+}
+
+function usePlayer(width) {
+  const location = useLocation();
+  const dispatch = useContext(PlayerDispatchContext);
+  const { track, isPlaying } = useContext(PlayerContext);
+
+  const [playerState, setPlayerState] = useState({
+    isPlaying: false,
+    currentTime: 0,
+    duration: 0,
+    volume: 0.7,
+    isOpened: false,
+  });
+  const audioRef = useRef();
+
+  // TIME
+  // for button play or pause
+  const togglePlay = () => {
+    dispatch({
+      type: actions.TOGGLE_PLAY,
+    });
+  };
+
+  const toggleOpen = () => {
+    if (width > breakpoints.lg && !playerState.isOpened) return;
+    setPlayerState((prev) => ({ ...prev, isOpened: !prev.isOpened }));
+  };
+
+  // when songs starts, updates the time (seconds)
+  const onTimeUpdate = () => {
+    if (!audioRef.current) return;
+    const currentTime = audioRef.current.currentTime;
+    const duration = audioRef.current.duration;
+    setPlayerState((prev) => ({ ...prev, currentTime, duration }));
+  };
+
+  // when songs starts, updates the time (seconds)
+  const onTrackTimeDrag = (newTime) => {
+    if (!audioRef.current) return;
+    audioRef.current.currentTime = newTime;
+    setPlayerState((prev) => ({ ...prev, currentTime: newTime }));
+  };
+
+  // VOLUME
+  // to mute volume button
+  const toggleVolume = () => {
+    const newVolume = playerState.volume > 0 ? 0 : 1;
+    onVolumeChange(newVolume);
+  };
+
+  // when songs starts, updates the time (seconds)
+  const onVolumeChange = (newVolume) => {
+    if (!audioRef.current) return;
+    audioRef.current.volume = newVolume;
+    setPlayerState((prev) => ({ ...prev, volume: newVolume }));
+  };
+
+  const handleNextSong = () => dispatch({ type: actions.NEXT_SONG });
+  const handlePrevSong = () => dispatch({ type: actions.PREV_SONG });
+
+  useEffect(() => {
+    if (!audioRef?.current) return;
+
+    if (isPlaying) {
+      audioRef.current.play().catch((err) => console.log(err));
+    } else {
+      audioRef.current.pause();
+    }
+  }, [audioRef, track, isPlaying]);
+
+  useEffect(() => {
+    if (playerState.isOpened) toggleOpen();
+  }, [location]);
+
+  useEffect(() => {
+    if (playerState.isOpened) {
+      window.scroll(0, 0);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "scroll";
+    }
+  }, [playerState.isOpened]);
+
+  if (width > breakpoints.lg && playerState.isOpened) toggleOpen();
+
+  return {
+    toggleOpen,
+    togglePlay,
+    toggleVolume,
+    handleNextSong,
+    handlePrevSong,
+    onTimeUpdate,
+    onTrackTimeDrag,
+    onVolumeChange,
+    isPlaying,
+    track,
+    audioRef,
+    playerState,
+  };
 }
 
 PlayerLayout.propTypes = {
