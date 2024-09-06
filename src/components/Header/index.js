@@ -3,7 +3,7 @@ import { HeaderWrapper, LogoWrapper } from "./styled";
 import { Logo, Search } from "../ui/Icons";
 import { SubTitle } from "../ui/Typography";
 import IconButton from "../ui/IconButton";
-import { ContentWrapper } from "Layout";
+import { ContentWrapper } from "components/Layout";
 import { Link } from "react-router-dom";
 
 function Header() {

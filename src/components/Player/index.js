@@ -15,7 +15,7 @@ import {
   BackButton,
   BigTrackImage,
 } from "./styled";
-import { ContentWrapper } from "Layout";
+import { ContentWrapper } from "components/Layout";
 import IconButton from "components/ui/IconButton";
 import { SkipLeft, SkipRight, Play, Volume, Pause } from "components/ui/Icons";
 import Slider from "rc-slider";

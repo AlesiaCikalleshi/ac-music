@@ -5,7 +5,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import Error from "pages/Error";
 import Home from "pages/Home";
 import Search from "pages/Search";
-import Layout from "Layout";
+import Layout from "components/Layout";
 import Genre from "pages/Genre";
 import Artist from "pages/Artist";
 

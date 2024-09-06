@@ -1,5 +1,5 @@
 import Header from "components/Header";
-import Player from "Player";
+import Player from "components/Player";
 import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
