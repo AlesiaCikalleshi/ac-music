@@ -2,7 +2,6 @@ import { useEffect, useReducer } from "react";
 import { initialState, playerReducer } from "context/playerReducer";
 import { PlayerContext, PlayerDispatchContext } from "context/playerContext";
 import { setStorageValue } from "services/localStorage";
-import AppRouter from "utils/AppRouter";
 import { ThemeProvider } from "styled-components";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { ToastContainer } from "react-toastify";
@@ -17,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 // Import rc-slider css
 import "rc-slider/assets/index.css";
+import AppRouter from "AppRouter";
 
 function App() {
   const [state, dispatch] = useReducer(playerReducer, initialState);

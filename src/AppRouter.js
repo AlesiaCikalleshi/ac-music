@@ -3,9 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import "rc-slider/assets/index.css";
 import { ErrorBoundary } from "react-error-boundary";
 import Error from "pages/Error";
-import Home from "pages/Home";
 import Search from "pages/Search";
 import Layout from "components/Layout";
+import Home from "pages/Home";
 import Genre from "pages/Genre";
 import Artist from "pages/Artist";
 

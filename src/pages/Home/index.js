@@ -1,37 +1,17 @@
-import React from "react";
-import { useEffect, useState } from "react";
 import { SectionTitle } from "components/ui/Typography";
-import { toast } from "react-toastify";
 import { Hero, Genres, Artists } from "components/Homepage";
-import TracksTable from "TracksTable";
 import { GreyTitle, TrendsAndArtistSection, StyledAside } from "./styled";
 import { loadCharts, loadTopRadioTrack } from "services/api";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import TracksTable from "components/TracksTable";
+import { useLoadData } from "hooks/useLoadData";
 
 function Home() {
-  const [chart, setChart] = useState();
-  const [radio, setRadio] = useState();
-  const [isLoading, setLoading] = useState();
-
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        setLoading(true);
-        const [chart, radio] = await Promise.all([loadCharts(), loadTopRadioTrack()]);
-        setChart(chart);
-        setRadio(radio);
-      } catch (err) {
-        toast.error(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadData();
-  }, []);
+  const [data, isLoading] = useLoadData(Promise.all([loadCharts(), loadTopRadioTrack()]));
+  const [chart, radio] = data || [];
 
   return (
     <main>
