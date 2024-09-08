@@ -75,22 +75,10 @@ export const StyledIconButton = styled(IconButton)`
   margin: 0 auto;
 `;
 
-export const Line = styled.td`
-  width: 100%;
-  height: 1px;
-
-  background: linear-gradient(
-    90deg,
-    rgba(198, 198, 198, 0) 0%,
-    #c6c6c6 50.54%,
-    rgba(198, 198, 198, 0) 98.02%
-  );
-`;
-
 export const IconWrapper = styled.div`
   display: none;
   width: 20px;
-  width: 20px;
+  height: 20px;
 `;
 
 export const TrackTitle = styled(Text)`

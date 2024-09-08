@@ -12,6 +12,7 @@ function IconButton({ withBackground, ...props }) {
 IconButton.propTypes = {
   children: PropTypes.element,
   withBackground: PropTypes.bool,
+  backgroundColor: PropTypes.string,
   width: PropTypes.number,
   height: PropTypes.number,
 };

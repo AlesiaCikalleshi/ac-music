@@ -36,8 +36,8 @@ function Hero({ tracks }) {
         </PlayButton>
       </TextWrapper>
       <HeroImage
-        src={width > breakpoints.xl ? TabletRadioImage : DesktopRadioImage}
-        alt="Radio Image"
+        src={width < breakpoints.xl ? TabletRadioImage : DesktopRadioImage}
+        alt="Hands holding radio"
       />
     </Wrapper>
   );
@@ -59,7 +59,6 @@ Hero.propTypes = {
       }),
     }),
   ),
-  isLoading: PropTypes.bool,
 };
 
 export default Hero;

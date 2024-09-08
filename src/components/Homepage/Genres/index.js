@@ -1,23 +1,23 @@
 import { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import Skeleton from "react-loading-skeleton";
-import { loadGenres } from "services/api";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { toast } from "react-toastify";
+import { loadGenres } from "services/api";
 import { ArrowLeft, ArrowRight } from "components/ui/Icons";
 import { SubTitle } from "components/ui/Typography";
+import { breakpoints } from "styles/BreakPoints";
+import { useWindowSize } from "hooks/useWindowSize";
 import GenreCard from "./GenreCard";
 import {
-  Button,
-  ButtonsWrapper,
-  TitleRow,
   Wrapper,
+  TitleRow,
+  ButtonsWrapper,
+  Button,
   GenresWrapper,
   GenreSkeletonWrapper,
 } from "./styled";
-import { Link } from "react-router-dom";
-import { useWindowSize } from "hooks/useWindowSize";
-import { breakpoints } from "styles/BreakPoints";
 
 function Genres() {
   const { width } = useWindowSize();

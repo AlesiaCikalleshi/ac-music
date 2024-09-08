@@ -35,8 +35,6 @@ function Search() {
   );
 }
 
-export default Search;
-
 function useDebounceLoadData(searchQuery) {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState();
@@ -63,5 +61,7 @@ function useDebounceLoadData(searchQuery) {
     }
   }, [searchQuery]);
 
-  return { isLoading, data };
+  return [isLoading, data];
 }
+
+export default Search;

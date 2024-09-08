@@ -1,6 +1,4 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
-import "rc-slider/assets/index.css";
 import { ErrorBoundary } from "react-error-boundary";
 import Error from "pages/Error";
 import Search from "pages/Search";

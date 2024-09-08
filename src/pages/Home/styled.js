@@ -29,6 +29,6 @@ export const StyledAside = styled.aside`
   margin-left: 90px;
 
   ${device.xl} {
-    margin-left: 0px;
+    margin-left: 0;
   }
 `;

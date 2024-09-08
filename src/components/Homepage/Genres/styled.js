@@ -6,7 +6,6 @@ export const Wrapper = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-between;
   gap: 35px;
   margin-bottom: 35px;
   overflow: hidden;

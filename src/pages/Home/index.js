@@ -10,7 +10,7 @@ import TracksTable from "components/TracksTable";
 import { useLoadData } from "hooks/useLoadData";
 
 function Home() {
-  const [data, isLoading] = useLoadData(Promise.all([loadCharts(), loadTopRadioTrack()]));
+  const [data, isLoading] = useLoadData(() => Promise.all([loadCharts(), loadTopRadioTrack()]));
   const [chart, radio] = data || [];
 
   return (

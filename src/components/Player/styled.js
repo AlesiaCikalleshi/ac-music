@@ -1,4 +1,4 @@
-import { MOBILE_PLAYER_HEIGHT, PLAYER_HEIGHT } from "common/constants";
+import { MOBILE_HEADER_HEIGHT, MOBILE_PLAYER_HEIGHT, PLAYER_HEIGHT } from "common/constants";
 import { SubText, Text } from "components/ui/Typography";
 import styled from "styled-components";
 import { device } from "styles/BreakPoints";
@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
 
   ${device.lg} {
     height: ${(props) =>
-      props.open ? `calc(100vh - ${MOBILE_PLAYER_HEIGHT}px)` : `${MOBILE_PLAYER_HEIGHT}px`};
+      props.open ? `calc(100vh - ${MOBILE_HEADER_HEIGHT}px)` : `${MOBILE_PLAYER_HEIGHT}px`};
     border-top-right-radius: ${(props) => (props.open ? 0 : "25px")};
     border-top-left-radius: ${(props) => (props.open ? 0 : "25px")};
   }
@@ -104,7 +104,7 @@ export const ProgressWrapper = styled.div`
   margin-left: 60px;
   width: 100%;
 
-  ${device.xl} {
+  ${device.lg} {
     margin: ${(props) => (props.open ? "40px 0" : 0)};
   }
 `;
@@ -136,7 +136,7 @@ export const TrackTime = styled(SubText)`
 export const BackButton = styled.button`
   background: none;
   border: none;
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.lightGrey};
   font-weight: ${(props) => props.theme.fontWeights.semibold};
   font-size: 18px;
   line-height: 27px;

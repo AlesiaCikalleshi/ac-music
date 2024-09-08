@@ -1,5 +1,5 @@
-import { HEADER_HEIGHT, MOBILE_HEADER_HEIGHT } from "common/constants";
 import styled from "styled-components";
+import { HEADER_HEIGHT, MOBILE_HEADER_HEIGHT } from "common/constants";
 import { device } from "styles/BreakPoints";
 
 export const HeaderWrapper = styled.header`
@@ -13,7 +13,7 @@ export const HeaderWrapper = styled.header`
   }
 `;
 
-export const LogoWrapper = styled.header`
+export const LogoWrapper = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;

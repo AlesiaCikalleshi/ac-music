@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import PropTypes from "prop-types";
 import { Table, TableHead, TableHeading, Line, TableHeadingTime } from "./styled";
 import TrackRow from "./TracksRow";
@@ -57,7 +57,7 @@ function TracksTable({ tracks, isLoading }) {
             </TableHeading>
           )}
           <TableHeading>
-            <SubText>{isLoading ? <Skeleton /> : "Actions"}</SubText>
+            <SubText>{isLoading ? <Skeleton width={70} /> : "Action"}</SubText>
           </TableHeading>
         </tr>
       </TableHead>

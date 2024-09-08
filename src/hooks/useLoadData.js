@@ -3,18 +3,18 @@ import { toast } from "react-toastify";
 
 export function useLoadData(fetchData) {
   const [data, setData] = useState();
-  const [isLoading, setLoading] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        setLoading(true);
+        setIsLoading(true);
         const data = await fetchData();
         setData(data);
       } catch (err) {
         toast.error(err.message);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 

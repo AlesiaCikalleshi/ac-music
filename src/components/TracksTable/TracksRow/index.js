@@ -54,16 +54,16 @@ function TrackRow({
           </TrackSubText>
         </TrackInfoTextWraper>
       </TrackInfo>
-      {screenWidth > breakpoints.md && (
+      {isMobileLayout && (
         <TableData>
           <SubText>
             {track?.duration ? formatSecondsToMSS(track?.duration) : <Skeleton width={48} />}
           </SubText>
         </TableData>
       )}
-      {screenWidth > breakpoints.md && (
+      {isMobileLayout && (
         <TableData>
-          <SubText>{track?.album?.title || <Skeleton width={350} />}</SubText>
+          <TrackSubText>{track?.album?.title || <Skeleton width={350} />}</TrackSubText>
         </TableData>
       )}
       <TableData>
@@ -72,13 +72,16 @@ function TrackRow({
             width={25}
             height={25}
             onClick={(event) => {
-              event.stopPropagation(), handleSaveTrackClick(track.id);
+              event.stopPropagation();
+              handleSaveTrackClick(track.id);
             }}
           >
             <Heart fill={isSaved ? theme.colors.white : "none"} />
           </StyledIconButton>
         ) : (
-          <Skeleton width={25} height={25} style={{ margin: "0 auto", display: "block" }} />
+          <StyledIconButton width={25} height={25}>
+            <Skeleton width={25} height={25} />
+          </StyledIconButton>
         )}
       </TableData>
     </StyledTrackRow>

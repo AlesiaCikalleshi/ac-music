@@ -1,12 +1,12 @@
-import Skeleton from "react-loading-skeleton";
 import PropTypes from "prop-types";
+import Skeleton from "react-loading-skeleton";
+import { Link } from "react-router-dom";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Wrapper, ArtistsWrapper, ArtistSkeletonWrapper, ArtistLoaderWrapper } from "./styled";
 import ArtistCard from "./ArtistCard";
 import { useWindowSize } from "hooks/useWindowSize";
 import { breakpoints } from "styles/BreakPoints";
-import { Link } from "react-router-dom";
 
 function Artists({ isLoading, artists }) {
   const { width } = useWindowSize();

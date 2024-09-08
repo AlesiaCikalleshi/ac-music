@@ -15,9 +15,9 @@ export const MainTitle = styled.h1`
 
 export const SectionTitle = styled.h2`
   font-family: ${({ theme }) => theme.fonts.poppins}, sans-serif;
-  font-size: 35;
+  font-size: 35px;
   font-weight: ${({ theme }) => theme.fontWeights.bold};
-  line-height: 52.5px;
+  line-height: 52px;
 
   ${device.md} {
     font-size: 22px;
@@ -29,7 +29,7 @@ export const SubTitle = styled.h3`
   font-family: ${({ theme }) => theme.fonts.poppins}, sans-serif;
   font-size: 25px;
   font-weight: ${({ theme }) => theme.fontWeights.bold};
-  line-height: 37.5px;
+  line-height: 38px;
 
   ${device.md} {
     font-size: 20px;
@@ -40,15 +40,15 @@ export const SubTitle = styled.h3`
 export const Text = styled.span`
   font-family: ${({ theme }) => theme.fonts.inter}, sans-serif;
   font-size: 22px;
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  line-height: 26.63px;
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
+  line-height: 27px;
 `;
 
 export const SubText = styled.span`
   font-family: ${({ theme }) => theme.fonts.inter}, sans-serif;
   font-size: 20px;
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  line-height: 24.2px;
+  font-weight: ${({ theme }) => theme.fontWeights.normal};
+  line-height: 24px;
 
   ${device.md} {
     font-size: 18px;
@@ -59,13 +59,13 @@ export const SubText = styled.span`
 export const SmallText = styled.span`
   font-family: ${({ theme }) => theme.fonts.inter}, sans-serif;
   font-size: 18px;
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  font-weight: ${({ theme }) => theme.fontWeights.normal};
   line-height: 22px;
 `;
 
 export const ButtonText = styled.span`
   font-family: ${({ theme }) => theme.fonts.inter}, sans-serif;
   font-size: 23px;
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  line-height: 27.84px;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  line-height: 28px;
 `;

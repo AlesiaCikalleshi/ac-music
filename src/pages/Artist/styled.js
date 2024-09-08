@@ -39,8 +39,8 @@ export const ArtistInfoWrapper = styled.div`
 `;
 
 export const ArtistImage = styled.img`
-  width: 305px;
-  height: 305px;
+  width: 350px;
+  height: 350px;
   border-radius: 25px;
   object-fit: cover;
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { Wrapper } from "./styled";
 import PropTypes from "prop-types";
 import { ButtonText, SectionTitle } from "components/ui/Typography";

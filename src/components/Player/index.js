@@ -94,10 +94,7 @@ function PlayerLayout({
     return (
       <ContentWrapper display="flex" direction="column" gap={14}>
         <BackButton onClick={toggleOpen}>Back</BackButton>
-        <BigTrackImage
-          src={track?.album?.cover_big}
-          alt={`${track.album.title}'s cover`}
-        ></BigTrackImage>
+        <BigTrackImage src={track?.album?.cover_big} alt={`${track.album.title}'s cover`} />
         <MobileTrackRow>
           <TrackInfoWrapper>
             <TrackInfoTextWrapper>
@@ -160,7 +157,7 @@ function PlayerLayout({
       <ContentWrapper display="flex" items="center" direction="column" gap={14}>
         <MobileTrackRow>
           <TrackInfoWrapper>
-            <TrackImage src={track?.album?.cover} alt={`${track.album.title}'s cover`}></TrackImage>
+            <TrackImage src={track?.album?.cover} alt={`${track.album.title}'s cover`} />
             <TrackInfoTextWrapper>
               <TrackTitle>{track?.title}</TrackTitle>
               <ArtistName>{track?.artist?.name}</ArtistName>
@@ -168,7 +165,8 @@ function PlayerLayout({
           </TrackInfoWrapper>
           <IconButton
             onClick={(event) => {
-              event.stopPropagation(), togglePlay();
+              event.stopPropagation();
+              togglePlay();
             }}
             width={55}
             height={55}
@@ -202,7 +200,7 @@ function PlayerLayout({
   return (
     <ContentWrapper display="flex" items="center">
       <TrackInfoWrapper>
-        <TrackImage src={track?.album?.cover} alt={`${track.album.title}'s cover`}></TrackImage>
+        <TrackImage src={track?.album?.cover} alt={`${track.album.title}'s cover`} />
         <TrackInfoTextWrapper>
           <TrackTitle>{track?.title}</TrackTitle>
           <ArtistName>{track?.artist?.name}</ArtistName>
@@ -257,7 +255,7 @@ function PlayerLayout({
   );
 }
 
-function usePlayer(width) {
+function usePlayer({ width }) {
   const location = useLocation();
   const dispatch = useContext(PlayerDispatchContext);
   const { track, isPlaying } = useContext(PlayerContext);
@@ -286,7 +284,7 @@ function usePlayer(width) {
 
   // when songs starts, updates the time (seconds)
   const onTimeUpdate = () => {
-    if (!audioRef.current) return;
+    if (!audioRef?.current) return;
     const currentTime = audioRef.current.currentTime;
     const duration = audioRef.current.duration;
     setPlayerState((prev) => ({ ...prev, currentTime, duration }));
@@ -294,7 +292,7 @@ function usePlayer(width) {
 
   // when songs starts, updates the time (seconds)
   const onTrackTimeDrag = (newTime) => {
-    if (!audioRef.current) return;
+    if (!audioRef?.current) return;
     audioRef.current.currentTime = newTime;
     setPlayerState((prev) => ({ ...prev, currentTime: newTime }));
   };
@@ -308,7 +306,7 @@ function usePlayer(width) {
 
   // when songs starts, updates the time (seconds)
   const onVolumeChange = (newVolume) => {
-    if (!audioRef.current) return;
+    if (!audioRef?.current) return;
     audioRef.current.volume = newVolume;
     setPlayerState((prev) => ({ ...prev, volume: newVolume }));
   };
